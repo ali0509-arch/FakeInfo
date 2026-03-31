@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Fake Person Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Fake Danish Person Generator</h1>
+
+    <div class="controls">
+        <button id="generatePersonBtn">Generér person</button>
+
+        <input type="number" id="bulkCount" value="5" min="2" max="100">
+        <button id="generateBulkBtn">Generér flere</button>
+    </div>
+
+    <div id="errorMessage" class="error"></div>
+
+    <h2>Enkelt person</h2>
+    <div id="singleResult" class="card hidden"></div>
+
+    <h2>Bulk</h2>
+    <div id="bulkResult"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

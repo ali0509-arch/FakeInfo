@@ -1,0 +1,6 @@
+@FakeInfo_HostAddress = http://localhost:5028
+
+GET {{FakeInfo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
