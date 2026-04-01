@@ -17,11 +17,11 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore
-        run: dotnet restore FakeInfo/FakeInfo.csproj
+        run: dotnet restore FakeInfo.sln
 
       - name: Build
-        run: dotnet build FakeInfo/FakeInfo.csproj --no-restore
+        run: dotnet build FakeInfo.sln --no-restore
 
       - name: Test
-        run: dotnet test FakeInfo/FakeInfo.csproj --no-build
+        run: dotnet test FakeInfo.sln --no-build
         # test
