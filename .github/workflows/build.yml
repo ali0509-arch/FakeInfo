@@ -20,8 +20,8 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build FakeInfo/FakeInfo.csproj --no-restore
 
       - name: Test
-        run: dotnet test --no-build
+        run: dotnet test FakeInfo/FakeInfo.csproj --no-build
         # test
