@@ -7,6 +7,30 @@ public class AddressGenerator
 {
     private readonly Random _random = new();
 
+    private static readonly List<string> StreetNames = new()
+    {
+        "Nørrebrogade",
+        "Vesterbrogade",
+        "Østerbrogade",
+        "Amagerbrogade",
+        "Strandvejen",
+        "Hovedgaden",
+        "Parkvej",
+        "Skovvej",
+        "Engvej",
+        "Bakkevej",
+        "Kirkegade",
+        "Stationsvej",
+        "Industrivej",
+        "Lindevej",
+        "Birkevej",
+        "Egevej",
+        "Søndergade",
+        "Vestergade",
+        "Østergade",
+        "Torvegade"
+    };
+
     private static readonly List<(string PostalCode, string Town)> PostalCodes = LoadPostalCodes();
 
     public Address GenerateAddress()
@@ -29,22 +53,10 @@ public class AddressGenerator
         };
     }
 
+    // ✅ FIXET – nu realistiske vejnavne
     private string GenerateStreet()
     {
-        const string letters = "abcdefghijklmnopqrstuvwxyzæøå";
-        int length = _random.Next(5, 12);
-
-        var chars = new char[length];
-        for (int i = 0; i < length; i++)
-        {
-            chars[i] = letters[_random.Next(letters.Length)];
-        }
-
-        var name = new string(chars);
-        name = char.ToUpper(name[0]) + name[1..];
-
-        string[] endings = { "vej", "gade", "stræde", "allé", "vænget" };
-        return name + endings[_random.Next(endings.Length)];
+        return StreetNames[_random.Next(StreetNames.Count)];
     }
 
     private string GenerateHouseNumber()
