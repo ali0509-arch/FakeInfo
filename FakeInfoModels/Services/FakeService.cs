@@ -119,14 +119,17 @@ public class FakeService
         return list;
     }
 
+    // ✅ FIXED CPR GENERATOR
     private string GenerateCpr(string gender, DateTime dob)
     {
         string datePart = dob.ToString("ddMMyy");
 
         int lastDigit = gender == "female"
-            ? _rand.Next(0, 5) * 2
-            : _rand.Next(0, 5) * 2 + 1;
+            ? _rand.Next(0, 5) * 2       // lige tal: 0,2,4,6,8
+            : _rand.Next(0, 5) * 2 + 1;  // ulige tal: 1,3,5,7,9
 
-        return datePart + _rand.Next(1000, 9999).ToString();
+        int middleDigits = _rand.Next(100, 999); // 3 cifre
+
+        return datePart + middleDigits.ToString() + lastDigit;
     }
 }

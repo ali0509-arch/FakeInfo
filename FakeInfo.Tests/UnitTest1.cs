@@ -80,25 +80,28 @@ public class Tests
         Assert.That(result.Cpr.StartsWith(expected), Is.True);
     }
 
-  
+    // 
     [Test]
     public void GetCprNameAndDate_ShouldRespectGenderRule()
     {
         // Arrange
         var service = new FakeService();
 
-        // Act
-        var result = service.GetCprNameAndDate();
+        // Act + Assert 
+        for (int i = 0; i < 50; i++)
+        {
+            var result = service.GetCprNameAndDate();
 
-        // Assert
-        int lastDigit = int.Parse(result.Cpr.Last().ToString());
+            int lastDigit = int.Parse(result.Cpr.Last().ToString());
 
-        Assert.That(
-            (result.Gender == "female" && lastDigit % 2 == 0) ||
-            (result.Gender == "male" && lastDigit % 2 == 1),
-            Is.True
-        );
+            Assert.That(
+                (result.Gender == "female" && lastDigit % 2 == 0) ||
+                (result.Gender == "male" && lastDigit % 2 == 1),
+                Is.True
+            );
+        }
     }
+
     [Test]
     public void GetPhone_ShouldBeValid()
     {
@@ -160,6 +163,7 @@ public class Tests
         Assert.That(result.Count, Is.LessThanOrEqualTo(100));
     }
 
+    // WHITE-BOX: under minimum
     [Test]
     public void GetPersons_WithTooLowInput_ShouldReturnMinimum2()
     {
@@ -171,5 +175,47 @@ public class Tests
 
         // Assert
         Assert.That(result.Count, Is.GreaterThanOrEqualTo(2));
+    }
+
+    // WHITE-BOX: over maximum
+    [Test]
+    public void GetPersons_WithTooHighInput_ShouldReturnMaximum100()
+    {
+        // Arrange
+        var service = new FakeService();
+
+        // Act
+        var result = service.GetPersons(200);
+
+        // Assert
+        Assert.That(result.Count, Is.LessThanOrEqualTo(100));
+    }
+
+    // WHITE-BOX: boundary = 2
+    [Test]
+    public void GetPersons_WithExactly2_ShouldReturn2()
+    {
+        // Arrange
+        var service = new FakeService();
+
+        // Act
+        var result = service.GetPersons(2);
+
+        // Assert
+        Assert.That(result.Count, Is.EqualTo(2));
+    }
+
+    // WHITE-BOX: boundary = 100
+    [Test]
+    public void GetPersons_WithExactly100_ShouldReturn100()
+    {
+        // Arrange
+        var service = new FakeService();
+
+        // Act
+        var result = service.GetPersons(100);
+
+        // Assert
+        Assert.That(result.Count, Is.EqualTo(100));
     }
 }
